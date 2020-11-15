@@ -13,14 +13,26 @@
            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
            {% endif %}
             <h1><a href="/">ODD Blog</a></h1>
-    </div>
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-8">
-            {% block content %}
-            {% endblock %}
+       </div>
+       <div class="authorization">
+           {% if user.is_authenticated %}
+                <p>Hi {{ user.username }}!</p>
+                <p><a href="{% url 'logout' %}">Log out</a></p>
+           {% else %}
+                <p><strong>You are not logged in.</strong></p>
+                <a href="{% url 'login' %}">Log In</a>
+                <p></p>
+                <p><strong>Try to register.</strong></p>
+                <a href="{% url 'signup' %}">Sign Nup</a>
+          {% endif %}
+       </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
+                </div>
             </div>
         </div>
-    </div>
     </body>
 </html>
