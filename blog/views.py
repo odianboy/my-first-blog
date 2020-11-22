@@ -27,7 +27,7 @@ def post_detail(request, pk):
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            Comment.author = request.user
+            new_comment.author = request.user
             new_comment.post = post
             new_comment.save()
     else:
