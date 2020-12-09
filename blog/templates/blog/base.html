@@ -29,7 +29,17 @@
                 <p></p>
                 <p><strong>Try to register.</strong></p>
                 <a href="{% url 'signup' %}">Sign up</a>
+
+                <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+                <a href="/login/vk-oauth2">Login with VK</a>
+                <a href="{% url 'social:begin' 'google-oauth2' %}">Login in Google+ </a>
+
           {% endif %}
+
+       </div>
+
+       <div class="social authorization">
+
        </div>
         <div class="content container">
             <div class="row">
