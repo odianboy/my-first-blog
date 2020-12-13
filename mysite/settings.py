@@ -25,7 +25,7 @@ SECRET_KEY = '=1f!!_z_5)v-(*yqw9c_n$$(%_lw%h@l_snhq3lw#7)g)o3d9g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'localhost']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog',
     'accounts.apps.AccountsConfig',
     'taggit',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -65,6 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
             ],
         },
     },
@@ -82,7 +86,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -102,6 +105,22 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '7693241'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'pHO2BiWVlt5d6o3ODlNN'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '952843568794-2g0b9rkp86fvaavg9ha4p5pd0a1dkec1.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'PW-XBTKYOUw0d6HsKXsqgKTR'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '382908236272447'
+SOCIAL_AUTH_FACEBOOK_SECRET = '765941c22d7e087f3c3b986398d473a3'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

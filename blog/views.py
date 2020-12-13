@@ -8,6 +8,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse_lazy
 from taggit.models import Tag
 from django.db.models import Count
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def post_list(request, tag_slug=None):
@@ -85,3 +87,7 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+class HomeView(LoginRequiredMixin, TemplateView):
+    template_name = 'blog/post_list.html'
